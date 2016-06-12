@@ -1,6 +1,6 @@
 # 使用 AIDL 实现 Android 的跨进程通信
 
-> > 欢迎Follow我的[GitHub](https://github.com/SpikeKing), 关注我的[简书](http://www.jianshu.com/users/e2b4dd6d3eb4/). 其余参考[Android目录](http://www.jianshu.com/p/780658b79227).
+> 欢迎Follow我的[GitHub](https://github.com/SpikeKing), 关注我的[简书](http://www.jianshu.com/users/e2b4dd6d3eb4/). 其余参考[Android目录](http://www.jianshu.com/p/780658b79227).
 
 **AIDL(Android Interface Definition Language)**, 即Android接口定义语言. 在Android中, AIDL是跨进程通信的主要实现方式. 我们同样也可以使用AIDL, 实现自己的跨进程方案. 本文介绍AIDL的使用方式.
 
