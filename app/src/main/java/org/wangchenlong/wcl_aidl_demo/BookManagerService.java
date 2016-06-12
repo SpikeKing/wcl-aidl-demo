@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 书籍管理服务
- * <p>
+ * <p/>
  * Created by wangchenlong on 16/5/12.
  */
 public class BookManagerService extends Service {
@@ -116,6 +116,5 @@ public class BookManagerService extends Service {
     @Nullable @Override public IBinder onBind(Intent intent) {
         return mBinder;
     }
-
 
 }
