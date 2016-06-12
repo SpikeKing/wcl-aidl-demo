@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MESSAGE_NEW_BOOK_ARRIVED = 1;
 
-    private TextView mTextView;
+    private TextView mTvBookList;
 
     private IBookManager mRemoteBookManager;
 
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override public void onServiceConnected(ComponentName name, IBinder service) {
             IBookManager bookManager = IBookManager.Stub.asInterface(service);
-
             try {
                 mRemoteBookManager = bookManager;
                 Book newBook = new Book(3, "学姐的故事");
@@ -73,9 +72,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextView = (TextView) findViewById(R.id.main_tv_book_list);
-        Intent intent = new Intent(this, BookManagerService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        mTvBookList = (TextView) findViewById(R.id.main_tv_book_list);
+
     }
 
     @Override protected void onDestroy() {
@@ -87,8 +85,22 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        unbindService(mConnection);
+        try {
+            unbindService(mConnection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
+    }
+
+    /**
+     * 绑定服务按钮的点击事件
+     *
+     * @param view 视图
+     */
+    public void bindService(View view) {
+        Intent intent = new Intent(this, BookManagerService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     /**
@@ -127,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < books.size(); ++i) {
                 content += books.get(i).toString() + "\n";
             }
-            mTextView.setText(content);
+            mTvBookList.setText(content);
         }
     }
 
@@ -138,11 +150,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private int getListNum() {
         int num = 0;
-        try {
-            List<Book> list = mRemoteBookManager.getBookList();
-            num = list.size();
-        } catch (RemoteException e) {
-            e.printStackTrace();
+        if (mRemoteBookManager != null) {
+            try {
+                List<Book> list = mRemoteBookManager.getBookList();
+                num = list.size();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
         return num;
     }

@@ -17,10 +17,16 @@
         android:onClick="getBookList"
         android:text="获取图书数量"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="bindService"
+        android:text="绑定服务"/>
+
     <TextView
         android:id="@+id/main_tv_book_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="getBookList"
-        android:text="获取图书列表"/>
+        android:text="显示图书列表(绑定服务)"/>
 </LinearLayout>
