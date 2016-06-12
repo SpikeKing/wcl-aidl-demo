@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private ServiceConnection mConnection = new ServiceConnection() {
-
         @Override public void onServiceConnected(ComponentName name, IBinder service) {
             IBookManager bookManager = IBookManager.Stub.asInterface(service);
 
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 获取图书礼拜二
+     * 获取图书数量的异步线程, 直接绑定点击事件
      *
      * @param view 视图
      */
@@ -132,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 获取列表的图书数量
+     *
+     * @return 数量
+     */
     private int getListNum() {
         int num = 0;
         try {
